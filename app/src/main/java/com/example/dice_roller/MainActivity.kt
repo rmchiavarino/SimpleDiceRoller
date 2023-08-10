@@ -13,8 +13,8 @@ class MainActivity : AppCompatActivity() {
 
         val rollButton:Button = findViewById(R.id.button)
         rollButton.setOnClickListener {
-            val toast = Toast.makeText(this,"Dice Rolled!",Toast.LENGTH_SHORT)
-            toast.show()
+            //val toast = Toast.makeText(this,"Dice Rolled!",Toast.LENGTH_SHORT)
+            //toast.show()
             val resultTextView: TextView = findViewById(R.id.textView)
             resultTextView.text = "6"
         }
