@@ -3,8 +3,7 @@ package com.example.dice_roller
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.ImageView
 
 /**
  * Esta Activity permite al usuario lanzar un dado y muestra el resultado
@@ -17,6 +16,9 @@ class MainActivity : AppCompatActivity() {
 
         val rollButton: Button = findViewById(R.id.button)
         rollButton.setOnClickListener { rollDice() }
+
+        //Hacemos un roll cuando arranca la app, asi no arranca en blanco
+        rollDice()
     }
 
     /**
@@ -27,9 +29,32 @@ class MainActivity : AppCompatActivity() {
         val dice = Dice(6)
         val diceRoll = dice.roll()
 
-        //Muestra en pantalla el resultado
-        val resultTextView: TextView = findViewById(R.id.textView)
-        resultTextView.text = diceRoll.toString()
+        //Le asigna un drawableResource al ImageView que representa el resultado del dado
+        val diceImage:ImageView = findViewById(R.id.imageView)
+        val drawableResource = when(diceRoll) {
+            1->R.drawable.dice_1
+            2->R.drawable.dice_2
+            3->R.drawable.dice_3
+            4->R.drawable.dice_4
+            5->R.drawable.dice_5
+            else->R.drawable.dice_6
+        }
+        diceImage.setImageResource(drawableResource)
+        //Actualizo la descripcion en texto de la imagen (Para personas no videntes):
+        diceImage.contentDescription = diceRoll.toString()
+
+        /**
+         * Implementacion menos eficiente:
+         *
+        when(diceRoll) {
+            1->diceImage.setImageResource(R.drawable.dice_1)
+            2->diceImage.setImageResource(R.drawable.dice_2)
+            3->diceImage.setImageResource(R.drawable.dice_3)
+            4->diceImage.setImageResource(R.drawable.dice_4)
+            5->diceImage.setImageResource(R.drawable.dice_5)
+            6->diceImage.setImageResource(R.drawable.dice_6)
+        }
+        */
     }
 }
 
